@@ -1,0 +1,22 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<nav class="teal lighten-1">
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo"><i class="material-icons">airplanemode_active</i>Fly Emirates</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li *ngIf="activeSession"><a routerLink="/admin">Usuarios</a></li>
+        <li *ngIf="activeSession"><a routerLink="/aeropuertos">Aeropuertos</a></li>
+        <li *ngIf="activeSession"><a routerLink="/rutas">Rutas</a></li>
+        <li *ngIf="activeSession"><a routerLink="/vuelos">Vuelos</a></li>
+        <li *ngIf="!activeSession"><a routerLink="/admin/create">Registrarse</a></li>
+        <li *ngIf="!activeSession"><a routerLink="/seguridad/login">Iniciar Sesión</a></li>
+        <li *ngIf="activeSession"><a routerLink="/seguridad/cerrar-sesion">Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="sidenav" id="mobile-demo">
+    <li><a href="#">Usuarios</a></li>
+        <li><a href="#">Aeropuertos</a></li>
+        <li><a href="#">Rutas</a></li>
+        <li><a href="#">Vuelos</a></li>
+  </ul>
