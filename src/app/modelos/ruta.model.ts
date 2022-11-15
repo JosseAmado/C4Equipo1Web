@@ -1,6 +1,6 @@
 export class RutaModelo{
     id?: String;
-    origen?: String;
-    destino?: string;
+    origenaeropuertoId?: String;
+    destinoaeropuertoId?: string;
     tiempo_estimado?:string;
 }
