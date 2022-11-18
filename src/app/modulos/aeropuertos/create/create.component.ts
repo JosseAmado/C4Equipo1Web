@@ -24,7 +24,7 @@ export class CreateComponent implements OnInit {
     coord_x: ['', [Validators.required]],
     coord_y: ['', [Validators.required]],
     siglas: ['', [Validators.required]],
-    tipo: ['', [Validators.required]],
+    tipo: ['', [Validators.required]],  
   });
 
   ngOnInit(): void {
@@ -39,11 +39,12 @@ export class CreateComponent implements OnInit {
     aeropuerto.coord_y = this.fgValidacionA.controls["coord_y"].value as string;
     aeropuerto.siglas = this.fgValidacionA.controls["siglas"].value as string;
     aeropuerto.tipo = this.fgValidacionA.controls["tipo"].value as string;
+    
 
     this.aeropuertoService.store(aeropuerto)
     .subscribe((data: AeropuertoModel)=> {
       Swal.fire('Creado correctamente!', '', 'success')
-      this.router.navigate(['/admin/get']);
+      this.router.navigate(['/aeropuertos/get']);
     },
     (error: any) => {
       console.log(error)

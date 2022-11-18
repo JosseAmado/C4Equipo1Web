@@ -17,14 +17,14 @@
         <label for="pais">País</label>
         </div>
         <div class="input-field col s6">
-        <input formControlName="Coord_X" type="text" class="validate">
-        <label for="Coord_X">Coord_X</label>
+        <input formControlName="coord_x" type="text" class="validate">
+        <label for="coord_x">Coord_X</label>
         </div>
     </div>
     <div class="row">
         <div class="input-field col s6">
-        <input formControlName="Coord_y" type="text" class="validate">
-        <label for="Coord_X">Coord_Y</label>
+        <input formControlName="coord_y" type="text" class="validate">
+        <label for="coord_y">Coord_Y</label>
         </div>
         <div class="input-field col s6">
         <input formControlName="siglas" type="text" class="validate">
@@ -33,9 +33,14 @@
     </div>
     <div class="row">
         <div class="input-field col s6">
-        <input formControlName="tipo" type="text" class="validate">
-        <label for="tipo">Tipo</label>
-    </div>
+            
+            <select formControlName="tipo" class="browser-default">
+                <option value="" disabled selected>Tipo</option>
+                <option value="nacional">Nacional</option>
+                <option value="internacional">Internacional</option>
+            </select>
+        </div>
+        
     </div>
 
     <div class="row center-align">

@@ -21,8 +21,8 @@ export class RutaService {
 
     store(ruta: RutaModelo): Observable<RutaModelo> {
       return this.http.post<RutaModelo>(`${this.url}/rutas`, {
-        origen: ruta.origen,
-        destino: ruta.destino,
+        origenaeropuertoId: ruta.origenaeropuertoId,
+        destinoaeropuertoId: ruta.destinoaeropuertoId,
         tiempo_estimado: ruta.tiempo_estimado
       });
     }
@@ -38,8 +38,8 @@ export class RutaService {
 
     update(ruta: RutaModelo): Observable<RutaModelo> {
       return this.http.patch<RutaModelo>(`${this.url}/rutas/${ruta.id}`, {
-        origen: ruta.origen,
-        destino: ruta.destino,
+        origenaeropuertoId: ruta.origenaeropuertoId,
+        destinoaeropuertoId: ruta.destinoaeropuertoId,
         tiempo_estimado: ruta.tiempo_estimado
       }, {
         headers: new HttpHeaders({

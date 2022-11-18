@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RutaService } from 'src/app/servicios/ruta.service';
 import { AeropuertoService } from 'src/app/servicios/aeropuerto.service';
@@ -15,18 +15,31 @@ import Swal from 'sweetalert2'
 export class CreateComponent implements OnInit {
 
   listaAeropuertos: AeropuertoModel[] = [];
-
+  
   constructor(private fb: FormBuilder,
     private rutaService: RutaService,
     private aeropuertoService: AeropuertoService,
     private router: Router) { }
 
     fgValidacionR = this.fb.group({
-      origen: ['', [Validators.required]],
-      destino: ['', [Validators.required]],
+      origenaeropuertoId: ['', [Validators.required]],
+      destinoaeropuertoId: ['', Validators.required ],
       tiempo_estimado: ['', [Validators.required]],
+    }, 
+    {
+      validator: this.validarRutas
     });
-  
+
+    validarRutas(group: FormGroup) {
+
+      const origen = group.controls['origenaeropuertoId'].value;
+      const destino = group.controls['destinoaeropuertoId'].value;
+
+      if(origen == '' || destino == '')
+        return false
+
+      return origen === destino ? { Same: true }: null;
+    }
   
   ngOnInit(): void {
     this.getAll();
@@ -41,15 +54,16 @@ export class CreateComponent implements OnInit {
   }
 
   store(){
+
     let ruta = new RutaModelo();
-    ruta.origenaeropuertoId = this.fgValidacionR.controls["origen"].value as string;
-    ruta.destinoaeropuertoId = this.fgValidacionR.controls["destino"].value as string;
-    ruta.tiempo_estimado = this.fgValidacionR.controls["tiempo_estimado"].value as string;
+    ruta.origenaeropuertoId = this.fgValidacionR.controls["origenaeropuertoId"].value as string;
+    ruta.destinoaeropuertoId = this.fgValidacionR.controls["destinoaeropuertoId"].value as string;
+    ruta.tiempo_estimado = this.fgValidacionR.controls["tiempo_estimado"].value as string;    
 
     this.rutaService.store(ruta)
     .subscribe((data: RutaModelo)=> {
       Swal.fire('Creado correctamente!', '', 'success')
-      this.router.navigate(['/admin/get']);
+      this.router.navigate(['/rutas/get']);
     },
     (error: any) => {
       console.log(error)

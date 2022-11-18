@@ -1,2 +1,31 @@
-<p>Vuelos get works!</p>
-<h1>Hola desde Vuelos</h1>
+<div class="container">
+    <br>
+    <a routerLink="/vuelos/create" class="btn">Registrar Vuelo</a>
+
+    <table class="table responsive">
+        <thead>
+            <tr>
+                <th>Fecha Inicio</th>
+                <th>Fecha Fin</th>
+                <th>Asientos Vendidos</th>
+                <th>Nombre Piloto</th>
+                <th>Ruta</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of listado">
+                <td>{{item.fecha_inicio}}</td>
+                <td>{{item.fecha_fin}}</td>
+                <td>{{item.asientos_vendidos}}</td>
+                <td>{{item.piloto}}</td>
+                <td>{{item.asientos_vendidos}}</td> 
+                <td>{{item.rutasId}}</td>
+
+                <td>
+                    <a routerLink="/vuelos/edit/{{item.id}}" class="btn">Editar</a>
+                    <button class="btn red" (click)="delete(item.id)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

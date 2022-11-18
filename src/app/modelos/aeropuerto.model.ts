@@ -7,5 +7,5 @@ export class AeropuertoModel{
     coord_y?: string;
     siglas?: string;
     tipo?: string;
-    rutasId?: string;
+    
 }

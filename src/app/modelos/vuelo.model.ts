@@ -5,6 +5,6 @@ export class VueloModelo{
     fecha_fin?: string;
     hora_fin?: string;
     asientos_vendidos?: string;
-    nombre_piloto?: string;
+    piloto?: string;
     rutasId?:string;
 }

@@ -27,8 +27,8 @@ export class VueloService {
         fecha_fin: vuelo.fecha_fin,
         hora_fin: vuelo.hora_fin,
         asientos_vendidos: vuelo.asientos_vendidos,
-        nombre_piloto: vuelo.nombre_piloto,
-        ruta: vuelo.ruta
+        nombre_piloto: vuelo.piloto,
+        ruta: vuelo.rutasId
       });
     }
 
@@ -48,8 +48,8 @@ export class VueloService {
         fecha_fin: vuelo.fecha_fin,
         hora_fin: vuelo.hora_fin,
         asientos_vendidos: vuelo.asientos_vendidos,
-        nombre_piloto: vuelo.nombre_piloto,
-        ruta: vuelo.ruta
+        nombre_piloto: vuelo.piloto,
+        ruta: vuelo.rutasId
       }, {
         headers: new HttpHeaders({
           "Authorization": `Bearer ${this.token}`

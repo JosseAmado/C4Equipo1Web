@@ -3,20 +3,25 @@
     <form [formGroup]="fgValidacionR" class="col s12" (ngSubmit)="store()">
         <div class="row">
             <div class="input-field col s6">
-                <label for="origen">Origen</label>
-                <select formControlName="origen" class="validate">
-                    <option [value]="item.id" *ngFor="let item of listaAeropuertos">{{item}}</option>
+                
+                <select formControlName="origenaeropuertoId" class="browser-default">
+                    <option value="" disabled selected>Origen</option>
+                    <option [value]="item.id" *ngFor="let item of listaAeropuertos">{{item.nombre}} ({{item.siglas}})</option>
                 </select>
             </div>
-            <div class="input-field col s6">
-                <input formControlName="destino" type="text" class="validate">
-                <label for="destino">Destino</label>
+            <div class="input-field col s6">               
+                
+                <select formControlName="destinoaeropuertoId" class="browser-default">
+                    <option value="" disabled selected>Destino</option>
+                    <option [value] ="item.id" *ngFor="let item of listaAeropuertos">{{item.nombre}} ({{item.siglas}})</option>                        
+                </select>
+                <span *ngIf="fgValidacionR.hasError('Same')"  class="red-text text-darken-1 helper-text" data-error="wrong" data-success="right">El destino no puede ser igual a origen</span>
             </div>
         </div>
         <div class="row">
-            <div class="input-field col s12">
+            <div class="input-field col s6">
                 <input formControlName="tiempo_estimado" type="text" class="validate">
-                <label for="tiempo_estimado">Telefono</label>
+                <label for="tiempo_estimado">Tiempo Estimado</label>
             </div>
         </div>       
 
