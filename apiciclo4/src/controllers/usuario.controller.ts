@@ -1,37 +1,66 @@
+import {service} from '@loopback/core';
 import {
   Count,
   CountSchema,
   Filter,
   FilterExcludingWhere,
   repository,
-  Where,
+  Where
 } from '@loopback/repository';
 import {
-  post,
-  param,
-  get,
-  getModelSchemaRef,
-  patch,
-  put,
-  del,
-  requestBody,
-  response,
+  del, get,
+  getModelSchemaRef, HttpErrors, param, patch, post, put, requestBody,
+  response
 } from '@loopback/rest';
-import {Usuario} from '../models';
-import {UsuarioRepository} from '../repositories';
-import {service} from '@loopback/core';
-import {AuthService} from '../services';
+
+import {authenticate} from '@loopback/authentication';
 import axios from 'axios';
 import {configuracion} from '../config/config';
+import {Credenciales, Usuario} from '../models';
+import {UsuarioRepository} from '../repositories';
+import {AuthService} from '../services';
 
+@authenticate("admin")
 export class UsuarioController {
   constructor(
     @repository(UsuarioRepository)
-    public usuarioRepository : UsuarioRepository,
+    public usuarioRepository: UsuarioRepository,
     @service(AuthService)
     public servicioAuth: AuthService
-  ) {}
+  ) { }
 
+  //Servicio de login
+  @authenticate.skip()
+  @post('/login', {
+    responses: {
+      '200': {
+        description: 'Identificación de usuarios'
+      }
+    }
+  })
+  async login(
+    @requestBody() credenciales: Credenciales
+  ) {
+    const p = await this.servicioAuth.identificarPersona(credenciales.usuario, credenciales.password);
+    if (p) {
+      const token = this.servicioAuth.GenerarTokenJWT(p);
+
+      return {
+        status: "success",
+        data: {
+          nombre: p.nombre,
+          apellidos: p.apellidos,
+          correo: p.correo,
+          id: p.id
+        },
+        token: token
+      }
+    } else {
+      throw new HttpErrors[401]("Datos invalidos")
+    }
+  }
+
+  @authenticate.skip()
   @post('/usuarios')
   @response(200, {
     description: 'Usuario model instance',
@@ -59,36 +88,36 @@ export class UsuarioController {
     let servicioWeb = '';
     let destino = '';
 
-    if(tipo == "sms"){
-       destino = usuario.telefono;
-       servicioWeb = 'send_sms';
-    }else{
-        destino = usuario.correo;
-        servicioWeb = 'send_email';
-      }
+    if (tipo == "sms") {
+      destino = usuario.telefono;
+      servicioWeb = 'send_sms';
+    } else {
+      destino = usuario.correo;
+      servicioWeb = 'send_email';
+    }
 
     const asunto = 'Registro de usuario en plataforma';
     const contenido = `Hola, ${usuario.nombre} ${usuario.apellidos} su contraseña en el portal es: ${clave}`
-      axios({
-        method: 'post',
-        url: configuracion.baseURL + servicioWeb,
+    axios({
+      method: 'post',
+      url: configuracion.baseURL + servicioWeb,
 
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        data: {
-          destino: destino,
-          asunto: asunto,
-          contenido: contenido
-        }
-      }).then((data) => {
-        console.log(data)
-      }).catch((err) => {
-        console.log(err)
-      });
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      data: {
+        destino: destino,
+        asunto: asunto,
+        contenido: contenido
+      }
+    }).then((data) => {
+      console.log(data)
+    }).catch((err) => {
+      console.log(err)
+    });
 
-      const p = await this.usuarioRepository.create(usuario);
+    const p = await this.usuarioRepository.create(usuario);
 
     return p;
 
@@ -104,7 +133,7 @@ export class UsuarioController {
   ): Promise<Count> {
     return this.usuarioRepository.count(where);
   }
-
+ 
   @get('/usuarios')
   @response(200, {
     description: 'Array of Usuario model instances',
