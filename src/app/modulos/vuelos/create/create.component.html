@@ -7,8 +7,18 @@
             <label for="fecha_inicio">Fecha Inicio</label>
             </div>
             <div class="input-field col s6">
-                <input type="text" class="datepicker">
-                <label for="fecha_fin">Fecha Fin</label>
+                <input formControlName="hora_inicio" type="time" class="validate">
+                <label for="hora_inicio">Hora Inicio</label>
+                </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+            <input formControlName="fecha_fin" type="date" class="validate">
+            <label for="fecha_inicio">Fecha Fin</label>
+            </div>
+            <div class="input-field col s6">
+                <input formControlName="hora_fin" type="time" class="validate">
+                <label for="hora_fin">Hora Fin</label>
                 </div>
         </div>
         <div class="row">

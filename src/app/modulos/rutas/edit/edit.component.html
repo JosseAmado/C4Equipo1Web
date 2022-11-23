@@ -1,1 +1,36 @@
-<p>edit works!</p>
+<div class="container">
+    <h3 class="center-align">Editar Ruta</h3>
+    <form [formGroup]="fgValidacionR" class="col s12" (ngSubmit)="edit()">
+        <input formControlName="id" type="hidden" class="validate">
+        <div class="row">
+            <div class="input-field col s6">
+                
+                <select formControlName="origenaeropuertoId" class="browser-default">
+                    <option value="" disabled selected>Origen</option>
+                    <option *ngFor="let item of listaAeropuertos" [value]="item.id">{{item.nombre}} ({{item.siglas}})</option>
+                </select>
+            </div>
+            <div class="input-field col s6">               
+                
+                <select formControlName="destinoaeropuertoId" class="browser-default">
+                    <option value="" disabled selected>Destino</option>
+                    <option [value] ="item.id" *ngFor="let item of listaAeropuertos">{{item.nombre}} ({{item.siglas}})</option>                        
+                </select>
+                <span *ngIf="fgValidacionR.hasError('Same')"  class="red-text text-darken-1 helper-text" data-error="wrong" data-success="right">El destino no puede ser igual a origen</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s6">
+                <input formControlName="tiempo_estimado" type="text" class="validate">
+                <label for="tiempo_estimado">Tiempo Estimado</label>
+            </div>
+        </div>       
+
+        <div class="row center-align">
+            <button [disabled]="!fgValidacionR.valid" class="btn waves-effect waves-light" type="submit"
+                name="action">Enviar
+                <i class="material-icons right">send</i>
+            </button>
+        </div>
+    </form>
+</div>

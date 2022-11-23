@@ -11,7 +11,7 @@ import { SeguridadService } from './seguridad.service';
 })
 export class VueloService {
 
-  url = "http://localhost:3000"
+  url = "https://apiloopbackeq1misiontic.herokuapp.com"
   token: string = ''
 
   constructor(private http: HttpClient,
@@ -27,7 +27,7 @@ export class VueloService {
         fecha_fin: vuelo.fecha_fin,
         hora_fin: vuelo.hora_fin,
         asientos_vendidos: vuelo.asientos_vendidos,
-        nombre_piloto: vuelo.piloto,
+        piloto: vuelo.piloto,
         ruta: vuelo.rutasId
       });
     }
@@ -48,7 +48,7 @@ export class VueloService {
         fecha_fin: vuelo.fecha_fin,
         hora_fin: vuelo.hora_fin,
         asientos_vendidos: vuelo.asientos_vendidos,
-        nombre_piloto: vuelo.piloto,
+        piloto: vuelo.piloto,
         ruta: vuelo.rutasId
       }, {
         headers: new HttpHeaders({

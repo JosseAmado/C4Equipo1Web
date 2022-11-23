@@ -21,9 +21,12 @@ export class EditComponent implements OnInit {
 
     fgValidacion = this.fb.group({
       fecha_inicio: ['', [Validators.required]],
+      hora_inicio: ['', [Validators.required]],
       fecha_fin: ['', [Validators.required]],
+      hora_fin: ['', [Validators.required]],
       asientos_vendidos: ['', [Validators.required]],
-      rutasId: ['', [Validators.required]],      
+      piloto: ['', [Validators.required]],
+      rutasId: ['', [Validators.required]]      
     });
 
   ngOnInit(): void {
@@ -35,22 +38,28 @@ export class EditComponent implements OnInit {
     this.vueloService.getWithId(id).subscribe((data: VueloModelo) => {
       console.log(data)
       this.fgValidacion.controls["fecha_inicio"].setValue(data.fecha_inicio as string)
+      this.fgValidacion.controls["hora_inicio"].setValue(data.fecha_fin as string)
       this.fgValidacion.controls["fecha_fin"].setValue(data.fecha_fin as string)
+      this.fgValidacion.controls["hora_fin"].setValue(data.fecha_fin as string)
       this.fgValidacion.controls["asientos_vendidos"].setValue(data.asientos_vendidos as string)
+      this.fgValidacion.controls["piloto"].setValue(data.rutasId as string)
       this.fgValidacion.controls["rutasId"].setValue(data.rutasId as string)
     })
   }
   
   edit(){
-    let usuario = new VueloModelo();
-    usuario.fecha_inicio = this.fgValidacion.controls["fecha_inicio"].value as string;
-    usuario.fecha_fin = this.fgValidacion.controls["fecha_fin"].value as string;
-    usuario.asientos_vendidos = this.fgValidacion.controls["asientos_vendidos"].value as string;
-    usuario.rutasId = this.fgValidacion.controls["rutasId"].value as string;
+    let vuelo = new VueloModelo();
+    vuelo.fecha_inicio = this.fgValidacion.controls["fecha_inicio"].value as string;
+    vuelo.hora_inicio = this.fgValidacion.controls["hora_inicio"].value as string;
+    vuelo.fecha_fin = this.fgValidacion.controls["fecha_fin"].value as string;
+    vuelo.hora_fin = this.fgValidacion.controls["hora_fin"].value as string;
+    vuelo.asientos_vendidos = this.fgValidacion.controls["asientos_vendidos"].value as string;
+    vuelo.piloto = this.fgValidacion.controls["piloto"].value as string;
+    vuelo.rutasId = this.fgValidacion.controls["rutasId"].value as string;
 
-      this.vueloService.update(usuario).subscribe((data: VueloModelo)=> {
+      this.vueloService.update(vuelo).subscribe((data: VueloModelo)=> {
         Swal.fire('Editado Correctamente!', '', 'success')
-        this.router.navigate(['/vuelos/get']);
+        this.router.navigate(['/vuelo/get']);
       },
       (error: any) => {
         console.log(error)
@@ -59,15 +68,18 @@ export class EditComponent implements OnInit {
 }
 
   store(){
-    let usuario = new VueloModelo();
-    usuario.fecha_inicio = this.fgValidacion.controls["fecha_inicio"].value as string;
-    usuario.fecha_fin = this.fgValidacion.controls["fecha_fin"].value as string;
-    usuario.asientos_vendidos = this.fgValidacion.controls["asientos_vendidos"].value as string;
-    usuario.rutasId = this.fgValidacion.controls["rutasId"].value as string;
+    let vuelo = new VueloModelo();
+    vuelo.fecha_inicio = this.fgValidacion.controls["fecha_inicio"].value as string;
+    vuelo.hora_inicio = this.fgValidacion.controls["hora_inicio"].value as string;
+    vuelo.fecha_fin = this.fgValidacion.controls["fecha_fin"].value as string;
+    vuelo.hora_fin = this.fgValidacion.controls["hora_fin"].value as string;
+    vuelo.asientos_vendidos = this.fgValidacion.controls["asientos_vendidos"].value as string;
+    vuelo.piloto = this.fgValidacion.controls["piloto"].value as string;
+    vuelo.rutasId = this.fgValidacion.controls["rutasId"].value as string;
 
-      this.vueloService.update(usuario).subscribe((data: VueloModelo)=> {
+      this.vueloService.update(vuelo).subscribe((data: VueloModelo)=> {
         Swal.fire('Editado Correctamente!', '', 'success')
-        this.router.navigate(['/vuelos/get']);
+        this.router.navigate(['/vuelo/get']);
       },
       (error: any) => {
         console.log(error)

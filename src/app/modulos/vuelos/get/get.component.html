@@ -6,7 +6,9 @@
         <thead>
             <tr>
                 <th>Fecha Inicio</th>
+                <th>Hora Inicio</th>
                 <th>Fecha Fin</th>
+                <th>Hora Fin</th>
                 <th>Asientos Vendidos</th>
                 <th>Nombre Piloto</th>
                 <th>Ruta</th>
@@ -15,15 +17,17 @@
         <tbody>
             <tr *ngFor="let item of listado">
                 <td>{{item.fecha_inicio}}</td>
+                <td>{{item.hora_inicio}}</td>
                 <td>{{item.fecha_fin}}</td>
+                <td>{{item.hora_fin}}</td>
                 <td>{{item.asientos_vendidos}}</td>
                 <td>{{item.piloto}}</td>
                 <td>{{item.asientos_vendidos}}</td> 
                 <td>{{item.rutasId}}</td>
 
                 <td>
-                    <a routerLink="/vuelos/edit/{{item.id}}" class="btn">Editar</a>
-                    <button class="btn red" (click)="delete(item.id)">Eliminar</button>
+                    <a routerLink="/vuelos/edit/{{item.id}}" class="btn"><i class="material-icons">edit</i></a>
+                    <button class="btn red" (click)="delete(item.id)"><i class="material-icons">delete</i></button>
                 </td>
             </tr>
         </tbody>

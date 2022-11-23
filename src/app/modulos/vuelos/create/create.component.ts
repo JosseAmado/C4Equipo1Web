@@ -24,6 +24,7 @@ export class CreateComponent implements OnInit {
     fecha_inicio: ['', [Validators.required]],
     hora_inicio: ['', [Validators.required]],
     fecha_fin: ['', [Validators.required]],
+    hora_fin: ['', [Validators.required]],
     asientos_vendidos: ['', [Validators.required]],
     piloto: ['', [Validators.required]],
     rutasId: ['', [Validators.required]],
@@ -45,6 +46,8 @@ export class CreateComponent implements OnInit {
     let vuelo = new VueloModelo();
     vuelo.fecha_inicio = this.fgValidacionV.controls["fecha_inicio"].value as string;
     vuelo.hora_inicio = this.fgValidacionV.controls["hora_inicio"].value as string;
+    vuelo.fecha_fin = this.fgValidacionV.controls["fecha_inicio"].value as string;
+    vuelo.hora_fin = this.fgValidacionV.controls["hora_fin"].value as string;
     vuelo.asientos_vendidos = this.fgValidacionV.controls["asientos_vendidos"].value as string;
     vuelo.piloto = this.fgValidacionV.controls["piloto"].value as string;
     vuelo.rutasId = this.fgValidacionV.controls["rutasId"].value as string;

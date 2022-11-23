@@ -16,8 +16,8 @@
                 <td>{{item.destinoaeropuertoId}}</td>
                 <td>{{item.tiempo_estimado}}</td>
                 <td>
-                    <a routerLink="/rutas/edit/{{item.id}}" class="btn">Editar</a>
-                    <button class="btn red" (click)="delete(item.id)">Eliminar</button>
+                    <a routerLink="/rutas/edit/{{item.id}}" class="btn"><i class="material-icons">edit</i></a>
+                    <button class="btn red" (click)="delete(item.id)"><i class="material-icons">delete</i></button>
                 </td>
             </tr>
         </tbody>

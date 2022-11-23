@@ -65,7 +65,7 @@ export class EditComponent implements OnInit {
  
     this.aeropuertoService.update(usuario).subscribe((data: AeropuertoModel)=> {
       Swal.fire('Editado Correctamente!', '', 'success')
-      this.router.navigate(['/admin/get']);
+      this.router.navigate(['/aeropuertos/get']);
     },
     (error: any) => {
       console.log(error)
@@ -87,7 +87,7 @@ export class EditComponent implements OnInit {
 
     this.aeropuertoService.store(usuario).subscribe((data: AeropuertoModel)=> {
       Swal.fire('Creado correctamente!', '', 'success')
-      this.router.navigate(['/admin/get']);
+      this.router.navigate(['/aeropuerto/get']);
     },
     (error: any) => {
       console.log(error)
